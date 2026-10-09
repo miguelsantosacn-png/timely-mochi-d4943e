@@ -28,4 +28,11 @@ document.querySelectorAll(".card").forEach((card,i)=>{card.style.display="block"
 function setLanguage(lang){const t=translations[lang]||translations.pt;document.documentElement.lang=lang;localStorage.setItem("pg-language",lang);const h1=document.querySelector(".hero h1");if(h1)h1.innerHTML=t.title;["projectText","pilotTag","pilotTitle","pilotText","methodQuestion","testStatement","methodTag","methodTitle","methodAction","investigateTitle","investigateText","testTitle","testText","scaleTitle","scaleText","founderTitle","phaseText","heroButton","founderButton","freeText","footerText","consentText"].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=t[id]||""});const lt=document.getElementById("legalText");if(lt)lt.innerHTML=t.legalText||"";}
 
 setLanguage(localStorage.getItem("pg-language")||"pt");
-</script></body></html
+
+</script
+<div style="text-align:center;padding:30px 15px;background:#111f35;">
+  <a href="diario.html" style="display:inline-block;background:#d4af37;color:#111;padding:15px 25px;border-radius:10px;text-decoration:none;font-weight:bold;">
+    📖 Diário de Investigação
+  </a>
+</div>
+></body></html
