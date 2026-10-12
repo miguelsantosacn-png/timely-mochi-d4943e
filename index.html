@@ -6,11 +6,11 @@
 <section class="light"><div class="w"><div class="tag" id="pilotTag"></div><h2 id="pilotTitle"></h2><p class="lead" id="pilotText" style="margin-left:0"></p><h2 id="methodQuestion"></h2><p><b id="testStatement"></b></p></div></section>
 <section><div class="w"><div class="tag" id="methodTag"></div><h2 id="methodTitle"></h2><div class="grid"><div class="card"><div class="num">01</div><h3 id="investigateTitle"></h3><p id="investigateText"></p></div><div class="card"><div class="num">02</div><h3 id="testTitle"></h3><p id="methodAction"></p></div><div class="card"><div class="num">03</div><h3 id="scaleTitle"></h3><p id="scaleText"></p></div></div></div></section>
 <section class="light" id="founder"><div class="w"><div class="box"><div class="tag">Founders 1000</div><h2 id="founderTitle"></h2><p id="phaseText"></p><div class="count"><span id="count">0</span> <small style="font-size:16px;color:#65757d">/ 1.000</small></div><form id="f" name="founders1000" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="https://script.google.com/macros/s/AKfycbxw41aybhdqBFQYHpM-hUomKCM-dLByfstyK1x3-DFuQrGL5qAhSwEU37zDZJzmyqv1zA/exec"><input type="hidden" name="form-name" value="founders1000"><p style="display:none"><label>Não preencher: <input name="bot-field"></label></p><label id="nameLabel"></label><input name="nome" required><label id="emailLabel"></label><input type="email" name="email" required><label id="countryLabel"></label><input name="pais" value="Portugal" required><label class="check"><input type="checkbox" name="consentimento" value="sim" required><span id="consentText"></span></label><button class="btn" id="founderButton"></button></form><div class="disc" id="legalText"><b>Iniciativa independente.</b> Cristiano Ronaldo, CR7, respetivas empresas, representantes, familiares, patrocinadores e entidades associadas não patrocinam, não promovem e não estão oficialmente associados a esta iniciativa nesta fase. Qualquer futura utilização comercial de imagem, marca ou outros direitos protegidos dependerá das autorizações e acordos legalmente necessários.</div></div></div></section>
-<footer><b><FOUNDERS 1000></b><br><span id="footerText"></span></footer>
+<footer><b>FOUNDERS 1000</b><br><span id="footerText"></span></footer>
 <script>
 function atualizarContador(dados) {
   const numero = document.getElementById("count");
-  if (numero && Number.isFinite(Number(dados.count))) {
+  if (numero && dados && Number.isFinite(Number(dados.count))) {
     numero.textContent = Math.min(Number(dados.count), 1000);
   }
 }
@@ -25,11 +25,34 @@ es:{title:"1.000 personas.<br><span class='gold'>Una idea.</span><br>Una oportun
 
 
 document.querySelectorAll(".card").forEach((card,i)=>{card.style.display="block";});
-function setLanguage(lang){const t=translations[lang]||translations.pt;document.documentElement.lang=lang;localStorage.setItem("pg-language",lang);const h1=document.querySelector(".hero h1");if(h1)h1.innerHTML=t.title;["projectText","pilotTag","pilotTitle","pilotText","methodQuestion","testStatement","methodTag","methodTitle","methodAction","investigateTitle","investigateText","testTitle","testText","scaleTitle","scaleText","founderTitle","phaseText","heroButton","founderButton","freeText","footerText","consentText"].forEach(id=>{const el=document.getElementById(id);if(el && t[id] !== undefined) el.innerHTML=t[id];;const lt=document.getElementById("legalText");if(lt)lt.innerHTML=t.legalText||"";}
+function setLanguage(lang) {
+  const t = translations[lang] || translations.pt;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem("pg-language", lang); } catch (e) {}
+  const h1 = document.querySelector(".hero h1");
+  if (h1) h1.innerHTML = t.title;
+  ["projectText","pilotTag","pilotTitle","pilotText","methodQuestion","testStatement","methodTag","methodTitle","methodAction","investigateTitle","investigateText","testTitle","testText","scaleTitle","scaleText","founderTitle","phaseText","heroButton","founderButton","freeText","footerText","consentText"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && t[id] !== undefined) el.innerHTML = t[id];
+  });
+  const legal = document.getElementById("legalText");
+  if (legal) legal.innerHTML = t.legalText || "";
+  const labels = {
+    pt: ["Nome", "Email", "País"],
+    en: ["Name", "Email", "Country"],
+    es: ["Nombre", "Correo electrónico", "País"]
+  };
+  ["nameLabel", "emailLabel", "countryLabel"].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = (labels[lang] || labels.pt)[i];
+  });
+}
 
-setLanguage(localStorage.getItem("pg-language")||"pt");
+let initialLanguage = "pt";
+try { initialLanguage = localStorage.getItem("pg-language") || "pt"; } catch (e) {}
+setLanguage(initialLanguage);
 
-</script
+</script>
 <div style="text-align:center;padding:30px 15px;background:#111f35;">
   <a href="diario.html" style="display:inline-block;background:#d4af37;color:#111;padding:15px 25px;border-radius:10px;text-decoration:none;font-weight:bold;">
     📖 Diário de Investigação
